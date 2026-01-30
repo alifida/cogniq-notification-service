@@ -1,0 +1,89 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /
+  forward-headers-strategy: framework
+
+spring:
+  application:
+    name: cogniq-notification-service
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/cogniq_notification
+    username: postgres
+    password: postgres123
+  flyway:
+    baseline-on-migrate: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  mail:
+    host: localhost
+    port: 1025
+    username: ""
+    password: ""
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+
+# Swagger: relative url so UI works both direct (port) and via gateway (/api/notifications/...)
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    url: v3/api-docs
+
+# Actuator & Prometheus
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  health:
+    db:
+      enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
+cogniq:
+  jwt:
+    secret: ""
+  notification:
+    from-email: "noreply@cogniq.local"
+    from-name: "CogniQ Flow"
+
+# Resilience4j
+resilience4j:
+  circuitbreaker:
+    instances:
+      dbCircuitBreaker:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
+
+logging:
+  level:
+    root: INFO
+    "[com.cognitivequantum]": DEBUG
+    "[org.hibernate.SQL]": DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

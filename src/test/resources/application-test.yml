@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:notification_test;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+  flyway:
+    enabled: false
+  mail:
+    host: localhost
+    port: 3025
+    properties:
+      mail:
+        smtp:
+          auth: false
+
+cogniq:
+  jwt:
+    secret: dGVzdC1zZWNyZXQtdG9rZW4tYmFzZTY0LWVuY29kZWQ=
+  notification:
+    from-email: test@test.local
+    from-name: Test
