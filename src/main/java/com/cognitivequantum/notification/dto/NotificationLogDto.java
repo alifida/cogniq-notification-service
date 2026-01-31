@@ -23,4 +23,8 @@ public class NotificationLogDto {
 	private String bodyPreview;
 	private LocalDateTime sentAt;
 	private LocalDateTime createdAt;
+	private LocalDateTime readAt;
+
+	@Schema(description = "True if notification has not been read")
+	private boolean unread;
 }

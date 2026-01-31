@@ -54,6 +54,9 @@ public class NotificationLog {
 	@Column(name = "created_at", updatable = false)
 	private LocalDateTime createdAt;
 
+	@Column(name = "read_at")
+	private LocalDateTime readAt;
+
 	@PrePersist
 	protected void onCreate() {
 		this.createdAt = LocalDateTime.now();
