@@ -18,7 +18,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-    show-sql: true
+    show-sql: false
   mail:
     host: localhost
     port: 1025
@@ -84,6 +84,6 @@ logging:
   level:
     root: INFO
     "[com.cognitivequantum]": DEBUG
-    "[org.hibernate.SQL]": DEBUG
+    "[org.hibernate.SQL]": INFO
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
